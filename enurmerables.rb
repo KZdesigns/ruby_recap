@@ -60,4 +60,26 @@ class Array
 
         flattened
     end
+
+    [1, 2, 3].my_zip([1,2], [8]) #=> [[1,1,8],[2,2,nil],[3,nil,nil]]
+
+    def my_zipp(*args)
+        zipped = []
+
+        self.length.times do |i|
+            subzip = [self[i]]
+
+            args.each do |array|
+                subzip << array[i]
+            end
+
+            zipped << subzip
+        end
+        
+        zipped 
+    end
+
+
+
+
 end
