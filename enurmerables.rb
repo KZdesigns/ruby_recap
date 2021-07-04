@@ -77,12 +77,20 @@ class Array
         zipped 
     end
 
-    
+
     def my_rotate(num = 1)
         split = num % self.length
 
         self.drop(split) + self.take(split)
     end
 
-    
+    def my_join(separator = "")
+        joined = ""
+
+        self.each do |el|
+            el == self[-1] ? joined += el : joined += (el + separator)
+        end
+
+        joined 
+    end
 end
