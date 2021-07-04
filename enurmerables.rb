@@ -48,22 +48,20 @@ class Array
     end
 
     def my_flatten
-        flattened = []
+        flat = []
 
-        self.my_each do |el|
+        self.each do |el|
             if el.is_a?(Array)
-                flattened.concat(el.my_flatten)
+                flat.concat(el.my_flatten)
             else
-                flattened << el
+                flat << el
             end
         end
 
-        flattened
+        flat
     end
 
-    [1, 2, 3].my_zip([1,2], [8]) #=> [[1,1,8],[2,2,nil],[3,nil,nil]]
-
-    def my_zipp(*args)
+    def my_zip(*args)
         zipped = []
 
         self.length.times do |i|
@@ -75,11 +73,10 @@ class Array
 
             zipped << subzip
         end
-        
+
         zipped 
     end
-
-
-
-
 end
+
+
+# [1, 2, 3].my_zip([1,2], [8])
