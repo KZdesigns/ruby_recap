@@ -76,7 +76,13 @@ class Array
 
         zipped 
     end
+
+    
+    def my_rotate(num = 1)
+        split = num % self.length
+
+        self.drop(split) + self.take(split)
+    end
+
+    
 end
-
-
-# [1, 2, 3].my_zip([1,2], [8])
