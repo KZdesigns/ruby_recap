@@ -93,4 +93,18 @@ class Array
 
         joined 
     end
+
+    def my_reverse
+        reversed = []
+        
+        max = self.length
+
+        (1..max).each do |i|
+            reversed << self[-i]
+        end
+
+        reversed 
+    end
 end
+
+
