@@ -1,3 +1,5 @@
+require 'byebug'
+
 # ruby prep_iteration_exercises.rb
 
 # ### Factors
@@ -94,9 +96,25 @@ end
 # words).
 
 def substrings(string)
+  subs_word = ""
+  subs = []
+
+  (0...string.length).each do |i|
+    (i...string.length).each do |j|
+      subs_word = "" if subs_word[-1] == string[-1]
+      subs_word += string[j]
+      subs << subs_word
+    end
+  end
+
+  subs 
 end
 
+
 def subwords(word, dictionary)
+  subs = substrings(word)
+  subs.select! { |substrings| dictionary.include?(substrings) }
+  subs.uniq
 end
 
 # ### Doubler
@@ -104,6 +122,13 @@ end
 # array with the original elements multiplied by two.
 
 def doubler(array)
+  doubled = []
+
+  array.each do |num|
+    doubled << num * 2
+  end
+
+  doubled
 end
 
 # ### My Each
@@ -131,6 +156,14 @@ end
 
 class Array
   def my_each(&prc)
+    i = 0
+
+    while i < self.length
+      prc.call(self[i])
+      i += 1 
+    end
+
+    self
   end
 end
 
@@ -149,12 +182,33 @@ end
 
 class Array
   def my_map(&prc)
+    mapped = []
+
+    self.my_each do |el|
+      mapped << prc.call(el)
+    end
+
+    mapped 
   end
 
   def my_select(&prc)
+    selected = []
+
+    self.each do |el|
+      selected << el if prc.call(el)
+    end
+
+    selected 
   end
 
   def my_inject(&blk)
+    acc = self[0]
+
+    self[1..-1].my_each do |el|
+      acc = blk.call(acc, el)
+    end
+
+    acc
   end
 end
 
@@ -168,4 +222,5 @@ end
 # ```
 
 def concatenate(strings)
+  strings.inject(:+)
 end
